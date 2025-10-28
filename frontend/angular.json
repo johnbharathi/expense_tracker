@@ -5,7 +5,24 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css",
+          "skipTests": false,
+          "flat": false,
+          "standalone": true,
+          "displayBlock": true,
+          "skipImport": true,
+          "prefix": "app",
+          "skipSelector": false,
+          "type": "component"
+        },
+        "@schematics/angular": {
+          "component": {
+            "type": "component"
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

@@ -1,17 +1,36 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
-import { SharedModule } from '../shared/shared.module';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    SharedModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -19,34 +38,10 @@ export class LoginComponent {
   errorMessage: string | null = null;
   hidePassword = true;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService
-  ) {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-      this.errorMessage = null;
-
-      const { username, password } = this.loginForm.value;
-
-      this.authService.login(username, password).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          this.isLoading = false;
-          this.errorMessage = error.error?.message || 'Login failed. Please try again.';
-        }
-      });
-    }
+  constructor() {
+  this.loginForm  = new FormBuilder().group({
+    username :[''],
+    password:[]
+  });
   }
 }
