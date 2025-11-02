@@ -1,51 +1,56 @@
-<div class="login-container">
-  <mat-card class="login-card form-field-animation">
-    <div class="login-header">
-      <h1 class="login-title">Welcome Back</h1>
-      <p class="login-subtitle">Sign in to your account</p>
-    </div>
-
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-container">
-          <mat-form-field appearance="outline" class="form-field-animation">
-            <mat-label>Username</mat-label>
-            <input matInput formControlName="username" placeholder="Enter your username">
-            <mat-icon matPrefix>person</mat-icon>
-            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-              Username is required
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field-animation">
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
-            <mat-icon matPrefix>lock</mat-icon>
-            <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-              {{hidePassword ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-              Password is required
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-              Password must be at least 6 characters
-            </mat-error>
-          </mat-form-field>
-
-          <div class="error-message" *ngIf="errorMessage">
-            {{ errorMessage }}
+    <div class="container d-flex align-items-center justify-content-center">
+      <div class="login-card shadow">
+        <div class="row g-0 h-100">
+          <div class="col-lg-6 bg-light d-none d-lg-block">
+            <div class="card-image d-flex align-items-center justify-content-center">
+              <img src="\assets\image.png" alt="Login illustration" class="img-fluid" />
+            </div>
           </div>
+          <div class="col-lg-6">
+            <div class="card-form  p-md-5">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3 text-center">
+              <h4 class="mb-1">Welcome Back</h4>
+              <p class="text-muted small mb-0">Sign in to your account</p>
+            </div>
 
-          <button mat-raised-button class="login-button" type="submit" [disabled]="loginForm.invalid || isLoading">
-            <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
-            <span *ngIf="!isLoading">Sign In</span>
-          </button>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" formControlName="username" placeholder="Enter your username">
+              </div>
+              <div *ngIf="loginForm.get('username')?.hasError('required')" class="form-text text-danger">Username is required</div>
+            </div>
 
-          <div class="forgot-password">
-            <a href="#">Forgot password?</a>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input [type]="hidePassword ? 'password' : 'text'" class="form-control" formControlName="password" placeholder="Enter your password">
+                <button type="button" class="btn btn-outline-secondary" (click)="hidePassword = !hidePassword" [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'">
+                  <i class="bi" [ngClass]="hidePassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+              </div>
+              <div *ngIf="loginForm.get('password')?.hasError('required')" class="form-text text-danger">Password is required</div>
+              <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="form-text text-danger">Password must be at least 6 characters</div>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+            <div class="d-grid">
+              <button class="btn btn-primary btn-lg" type="submit" [disabled]="loginForm.invalid || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Sign In
+              </button>
+            </div>
+
+            <div class="text-center mt-3">
+              <a href="#" class="small">Forgot password?</a>
+            </div>
+          </form>
+            </div>
           </div>
         </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+      </div>
+    </div>
