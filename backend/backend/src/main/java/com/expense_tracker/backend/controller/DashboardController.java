@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/dashboard")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class DashboardController {
 
     @Autowired
