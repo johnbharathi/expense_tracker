@@ -1,6 +1,5 @@
 package com.expense_tracker.backend.dto.respose;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +10,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DashboardResponse {
-    private BigDecimal totalIncome;
-    private BigDecimal totalExpense;
-    private BigDecimal balance;
-    private Integer expenseCount;
-    private Integer incomeCount;
+
+	private BigDecimal totalIncome;
+	private BigDecimal totalExpense;
+	private BigDecimal balance;
+	private Integer expenseCount;
+	private Integer incomeCount;
+
+	public DashboardResponse(BigDecimal totalIncome, BigDecimal totalExpense, BigDecimal balance, int expenseCount,
+			int incomeCount) {
+		this.totalIncome = totalIncome;
+		this.totalExpense = totalExpense;
+		this.balance = balance;
+		this.expenseCount = expenseCount;
+		this.incomeCount = incomeCount;
+	}
+
 }

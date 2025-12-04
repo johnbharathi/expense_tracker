@@ -18,7 +18,95 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Budget {
 
-    @Id
+    public Long getBudgetId() {
+		return budgetId;
+	}
+
+	public void setBudgetId(Long budgetId) {
+		this.budgetId = budgetId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public BigDecimal getBudgetAmount() {
+		return budgetAmount;
+	}
+
+	public void setBudgetAmount(BigDecimal budgetAmount) {
+		this.budgetAmount = budgetAmount;
+	}
+
+	public PeriodType getPeriodType() {
+		return periodType;
+	}
+
+	public void setPeriodType(PeriodType periodType) {
+		this.periodType = periodType;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public BigDecimal getAlertThreshold() {
+		return alertThreshold;
+	}
+
+	public void setAlertThreshold(BigDecimal alertThreshold) {
+		this.alertThreshold = alertThreshold;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "budget_id")
     private Long budgetId;

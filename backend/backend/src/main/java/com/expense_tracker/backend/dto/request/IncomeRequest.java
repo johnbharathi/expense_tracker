@@ -11,7 +11,47 @@ import java.time.LocalDate;
 @Data
 public class IncomeRequest {
 
-    @NotNull(message = "Category ID is required")
+    public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public LocalDate getIncomeDate() {
+		return incomeDate;
+	}
+
+	public void setIncomeDate(LocalDate incomeDate) {
+		this.incomeDate = incomeDate;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@NotNull(message = "Category ID is required")
     private Long categoryId;
 
     @NotNull(message = "Amount is required")

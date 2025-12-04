@@ -40,22 +40,22 @@ public class BudgetController {
         return ResponseEntity.ok(budget);
     }
 
-    @GetMapping("/{id}/spent")
-    public ResponseEntity<Map<String, BigDecimal>> getBudgetSpent(@PathVariable Long id) {
-        Budget budget = budgetService.getBudgetById(id);
-        BigDecimal spent = budgetService.getBudgetSpent(id);
-        BigDecimal remaining = budget.getBudgetAmount().subtract(spent);
-        BigDecimal percentage = spent.divide(budget.getBudgetAmount(), 2, BigDecimal.ROUND_HALF_UP)
-                .multiply(new BigDecimal("100"));
-
-        Map<String, BigDecimal> response = new HashMap<>();
-        response.put("budgetAmount", budget.getBudgetAmount());
-        response.put("spent", spent);
-        response.put("remaining", remaining);
-        response.put("percentage", percentage);
-
-        return ResponseEntity.ok(response);
-    }
+//    @GetMapping("/{id}/spent")
+//    public ResponseEntity<Map<String, BigDecimal>> getBudgetSpent(@PathVariable Long id) {
+//        Budget budget = budgetService.getBudgetById(id);
+//        BigDecimal spent = budgetService.getBudgetSpent(id);
+//        BigDecimal remaining = budget.getBudgetAmount().subtract(spent);
+//        BigDecimal percentage = spent.divide(budget.getBudgetAmount(), 2, BigDecimal.ROUND_HALF_UP)
+//                .multiply(new BigDecimal("100"));
+//
+//        Map<String, BigDecimal> response = new HashMap<>();
+//        response.put("budgetAmount", budget.getBudgetAmount());
+//        response.put("spent", spent);
+//        response.put("remaining", remaining);
+//        response.put("percentage", percentage);
+//
+//        return ResponseEntity.ok(response);
+//    }
 
     @PostMapping
     public ResponseEntity<Budget> createBudget(@Valid @RequestBody BudgetRequest request) {
