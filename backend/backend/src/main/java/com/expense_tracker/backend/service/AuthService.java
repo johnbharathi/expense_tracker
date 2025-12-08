@@ -1,7 +1,6 @@
 package com.expense_tracker.backend.service;
 
 
-
 import com.expense_tracker.backend.dto.request.LoginRequest;
 import com.expense_tracker.backend.dto.request.RegisterRequest;
 import com.expense_tracker.backend.dto.respose.AuthResponse;
@@ -35,9 +34,9 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
         // Check if username exists
-//        if (userRepository.existsById(request.getUsername())) {
-//            throw new RuntimeException("Username already exists");
-//        }
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
 
         // Check if email exists
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -77,7 +76,7 @@ public class AuthService {
         String token = tokenProvider.generateToken(authentication);
 
         // Update last login
-        User user = userRepository.findByUserName(request.getUsernameOrEmail())
+        User user = userRepository.findByUsername(request.getUsernameOrEmail())
                 .orElseGet(() -> userRepository.findByEmail(request.getUsernameOrEmail())
                         .orElseThrow(() -> new RuntimeException("User not found")));
 
