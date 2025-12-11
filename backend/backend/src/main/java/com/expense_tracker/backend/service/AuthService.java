@@ -7,6 +7,8 @@ import com.expense_tracker.backend.dto.respose.AuthResponse;
 import com.expense_tracker.backend.entity.User;
 import com.expense_tracker.backend.repository.UserRepository;
 import com.expense_tracker.backend.security.JwtTokenProvider;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +17,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Service
 public class AuthService {
@@ -48,8 +52,8 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
-        user.setFirstName(request.getFirstname());
-        user.setLastName(request.getLastname());
+//        user.setFirstName(request.getFirstname());
+//        user.setLastName(request.getLastname());
         user.setPhoneNumber(request.getPhoneNumber());
         user.setIsActive(true);
         user.setIsEmailVerified(false);
