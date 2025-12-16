@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center min-vh-100 py-5">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">💰 Expense Tracker</h2>
+            <p class="text-muted">Create your account</p>
+          </div>
+
+          <!-- Error Alert -->
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+            <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+          </div>
+
+          <!-- Register Form -->
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                  placeholder="Enter first name">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                  placeholder="Enter last name">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" id="username" formControlName="username"
+                  placeholder="Choose a username"
+                  [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+              </div>
+              <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+                class="text-danger small mt-1">
+                <span *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</span>
+                <span *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 3
+                  characters</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email"
+                  [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+              </div>
+              <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                class="text-danger small mt-1">
+                <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                <input type="tel" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                  placeholder="Enter phone number">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" id="password" formControlName="password"
+                  placeholder="Create password"
+                  [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+              </div>
+              <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                class="text-danger small mt-1">
+                <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+                <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6
+                  characters</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password <span
+                  class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                  placeholder="Confirm password"
+                  [class.is-invalid]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+              </div>
+              <div
+                *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched"
+                class="text-danger small mt-1">
+                Passwords do not match
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="loading || registerForm.invalid">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span *ngIf="!loading"><i class="fas fa-user-plus me-2"></i>Create Account</span>
+              <span *ngIf="loading">Creating account...</span>
+            </button>
+          </form>
+
+          <div class="text-center">
+            <p class="mb-0">Already have an account?
+              <a routerLink="/auth/login" class="text-primary fw-bold">Sign In</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

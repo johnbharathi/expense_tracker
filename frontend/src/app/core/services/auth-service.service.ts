@@ -33,7 +33,7 @@ export class AuthService {
       );
   }
 
-  login(request: LoginRequest, password: any) {
+  login(request: LoginRequest) {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, request).pipe(
       tap((response) => {
         this.setCurrentUser(response);
